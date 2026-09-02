@@ -1,4 +1,9 @@
 {
+  "apphosting": {
+    "backendId": "innoedu",
+    "rootDir": "/",
+    "ignore": ["node_modules", ".git", "data/raw", "firebase-debug.log", "firestore-debug.log", ".firebase-emulator-data"]
+  },
   "firestore": {
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
