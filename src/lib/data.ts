@@ -25,6 +25,11 @@ export async function getAllPublications(): Promise<Publication[]> {
   return snap.docs.map(toPublication);
 }
 
+export async function getPublication(id: string): Promise<Publication | null> {
+  const doc = await getDb().collection("publications").doc(id).get();
+  return doc.exists ? toPublication(doc as QueryDocumentSnapshot<DocumentData>) : null;
+}
+
 export async function getPublicationsForResearcher(
   researcherId: string
 ): Promise<Publication[]> {

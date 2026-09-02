@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { getPublicationsForResearcher, getResearcher } from "@/lib/data";
 import { CategoryBadge, LevelBadge, StatusBadge } from "@/components/Badges";
 
@@ -57,18 +58,9 @@ export default async function ResearcherDetailPage({
               {publications.map((p) => (
                 <tr key={p.id} className="hover:bg-slate-50">
                   <td className="max-w-md px-4 py-3">
-                    {p.doi ? (
-                      <a
-                        href={`https://doi.org/${p.doi}`}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-blue-600 hover:underline"
-                      >
-                        {p.title}
-                      </a>
-                    ) : (
-                      p.title
-                    )}
+                    <Link href={`/publications/${p.id}`} className="text-blue-600 hover:underline">
+                      {p.title}
+                    </Link>
                   </td>
                   <td className="px-4 py-3">{p.year ?? "—"}</td>
                   <td className="px-4 py-3 text-slate-600">{p.source_title}</td>

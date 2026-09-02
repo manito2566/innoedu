@@ -119,7 +119,11 @@ export default async function PublicationsPage({
               const researcher = researcherById.get(p.researcher_id);
               return (
                 <tr key={p.id} className="hover:bg-slate-50">
-                  <td className="max-w-sm px-4 py-3">{p.title}</td>
+                  <td className="max-w-sm px-4 py-3">
+                    <Link href={`/publications/${p.id}`} className="text-slate-800 hover:text-blue-600 hover:underline">
+                      {p.title}
+                    </Link>
+                  </td>
                   <td className="px-4 py-3">
                     {researcher ? (
                       <Link href={`/researchers/${researcher.id}`} className="text-blue-600 hover:underline">

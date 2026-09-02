@@ -44,6 +44,22 @@ export interface Publication {
   classification_status: ClassificationStatus;
   classification_note: string;
   abstract?: string;
+  media?: PublicationMedia;
+  view_count?: number;
+  download_count?: number;
+}
+
+export interface MediaFile {
+  name: string;
+  url: string;
+  size: number;
+}
+
+export interface PublicationMedia {
+  cover_image_url?: string;
+  gallery_urls?: string[];
+  video_url?: string;
+  files?: MediaFile[];
 }
 
 export interface ImportBatch {

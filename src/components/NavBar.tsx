@@ -5,6 +5,7 @@ const LINKS = [
   { href: "/researchers", label: "คณาจารย์" },
   { href: "/publications", label: "ผลงานตีพิมพ์" },
   { href: "/admin/classify", label: "จัดประเภท" },
+  { href: "/admin/media", label: "จัดการสื่อเผยแพร่" },
   { href: "/admin/researchers/new", label: "+ คณาจารย์" },
   { href: "/admin/publications/new", label: "+ ผลงาน" },
   { href: "/admin/import", label: "นำเข้า TCI/อื่นๆ" },
