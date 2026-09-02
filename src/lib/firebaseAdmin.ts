@@ -1,4 +1,4 @@
-import { cert, getApps, initializeApp, type App } from "firebase-admin/app";
+import { applicationDefault, cert, getApps, initializeApp, type App } from "firebase-admin/app";
 import { getFirestore, type Firestore } from "firebase-admin/firestore";
 
 const PROJECT_ID = process.env.FIREBASE_PROJECT_ID ?? "innoedu-local";
@@ -21,8 +21,11 @@ function createApp(): App {
     });
   }
 
-  // Falls back to Application Default Credentials (e.g. on Firebase App Hosting).
-  return initializeApp({ projectId: PROJECT_ID });
+  // Falls back to Application Default Credentials (e.g. on Firebase App
+  // Hosting, or a local GOOGLE_APPLICATION_CREDENTIALS key file). Must be
+  // requested explicitly — initializeApp({projectId}) alone does not
+  // auto-discover ADC the way a bare initializeApp() does.
+  return initializeApp({ credential: applicationDefault(), projectId: PROJECT_ID });
 }
 
 let firestoreInstance: Firestore | null = null;
