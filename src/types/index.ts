@@ -43,6 +43,7 @@ export interface Publication {
   innovation_level: InnovationLevel | null;
   classification_status: ClassificationStatus;
   classification_note: string;
+  abstract?: string;
 }
 
 export interface ImportBatch {
