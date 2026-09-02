@@ -1,0 +1,10 @@
+env:
+  - variable: FIREBASE_PROJECT_ID
+    value: innoedu-edpex-a25d4
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: ADMIN_PASSWORD
+    secret: ADMIN_PASSWORD
+    availability:
+      - RUNTIME
