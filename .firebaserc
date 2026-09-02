@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "innoedu-edpex-a25d4"
-  }
+  },
+  "targets": {
+    "innoedu-edpex-a25d4": {
+      "storage": {
+        "default": [
+          "innoedu-edpex-a25d4"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }
