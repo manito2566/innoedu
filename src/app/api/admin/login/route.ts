@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { absoluteUrl } from "@/lib/requestUrl";
 
 const COOKIE_NAME = "innoedu_admin";
 
@@ -8,13 +9,13 @@ export async function POST(request: NextRequest) {
   const next = String(form.get("next") ?? "/admin/classify");
 
   if (password !== process.env.ADMIN_PASSWORD) {
-    const loginUrl = new URL("/admin/login", request.url);
+    const loginUrl = absoluteUrl("/admin/login", request);
     loginUrl.searchParams.set("next", next);
     loginUrl.searchParams.set("error", "1");
     return NextResponse.redirect(loginUrl, { status: 303 });
   }
 
-  const response = NextResponse.redirect(new URL(next, request.url), { status: 303 });
+  const response = NextResponse.redirect(absoluteUrl(next, request), { status: 303 });
   response.cookies.set(COOKIE_NAME, password, {
     httpOnly: true,
     sameSite: "lax",

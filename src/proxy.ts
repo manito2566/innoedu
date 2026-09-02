@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { absoluteUrl } from "@/lib/requestUrl";
 
 const COOKIE_NAME = "innoedu_admin";
 
@@ -12,7 +13,7 @@ export function proxy(request: NextRequest) {
   if (pathname.startsWith("/admin") || pathname.startsWith("/api/admin")) {
     const cookie = request.cookies.get(COOKIE_NAME)?.value;
     if (cookie !== process.env.ADMIN_PASSWORD) {
-      const loginUrl = new URL("/admin/login", request.url);
+      const loginUrl = absoluteUrl("/admin/login", request);
       loginUrl.searchParams.set("next", pathname);
       return NextResponse.redirect(loginUrl);
     }

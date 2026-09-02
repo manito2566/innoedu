@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { getDb } from "@/lib/firebaseAdmin";
 import { slugifyName } from "@/lib/scopusImport";
+import { absoluteUrl } from "@/lib/requestUrl";
 import type { Researcher } from "@/types";
 
 export async function POST(request: NextRequest) {
@@ -11,7 +12,7 @@ export async function POST(request: NextRequest) {
   const scopus_id = String(form.get("scopus_id") ?? "").trim() || null;
 
   if (!name_th || !department) {
-    const url = new URL("/admin/researchers/new", request.url);
+    const url = absoluteUrl("/admin/researchers/new", request);
     url.searchParams.set("error", "missing_fields");
     return NextResponse.redirect(url, { status: 303 });
   }
@@ -32,5 +33,5 @@ export async function POST(request: NextRequest) {
 
   await db.collection("researchers").doc(id).set(researcher, { merge: true });
 
-  return NextResponse.redirect(new URL(`/researchers/${id}`, request.url), { status: 303 });
+  return NextResponse.redirect(absoluteUrl(`/researchers/${id}`, request), { status: 303 });
 }

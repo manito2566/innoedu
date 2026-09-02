@@ -2,6 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { getDb } from "@/lib/firebaseAdmin";
 import { suggestCategory } from "@/lib/taxonomy";
 import { publicationDocId } from "@/lib/scopusImport";
+import { absoluteUrl } from "@/lib/requestUrl";
 import type { Publication, SourceDb } from "@/types";
 
 export async function POST(request: NextRequest) {
@@ -15,7 +16,7 @@ export async function POST(request: NextRequest) {
   const pub_type = String(form.get("pub_type") ?? "Journal").trim();
 
   if (!researcher_id || !title) {
-    const url = new URL("/admin/publications/new", request.url);
+    const url = absoluteUrl("/admin/publications/new", request);
     url.searchParams.set("error", "missing_fields");
     return NextResponse.redirect(url, { status: 303 });
   }
@@ -48,5 +49,5 @@ export async function POST(request: NextRequest) {
 
   await db.collection("publications").doc(docId).set(pub, { merge: true });
 
-  return NextResponse.redirect(new URL(`/researchers/${researcher_id}`, request.url), { status: 303 });
+  return NextResponse.redirect(absoluteUrl(`/researchers/${researcher_id}`, request), { status: 303 });
 }
